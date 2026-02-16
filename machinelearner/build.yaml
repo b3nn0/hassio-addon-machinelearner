@@ -1,0 +1,11 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+build_from:
+  aarch64: "ghcr.io/hassio-addons/ubuntu-base/aarch64:11.0.0"
+  amd64: "ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0"
+labels:
+  org.opencontainers.image.title: "Home Assistant Add-on: Machine Learner add-on"
+  org.opencontainers.image.description: "Addon to train & predict with LightGBM."
+  org.opencontainers.image.source: "https://github.com/b3nn0/hassio-addon-machinelearner/tree/main"
+  org.opencontainers.image.licenses: "Apache License 2.0"
+args:
+  TEMPIO_VERSION: "2021.09.0"

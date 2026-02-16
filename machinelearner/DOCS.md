@@ -5,10 +5,10 @@ This addon provides a FastAPI-based service for training and making predictions 
 ## Features
 
 - Train LightGBM models with provided data
-- Make predictions using trained models
+- Make predictions using trained models 
 - In-memory model storage
 - RESTful API endpoints
-- Compatible with Home Assistant Supervisor
+- Home Assistant addon compatible
 
 ## API Endpoints
 
@@ -61,15 +61,15 @@ GET /health
 
 ## Usage
 
-1. Install this addon in Home Assistant
-2. Send training data to `/train` endpoint via Home Assistant's ingress
+1. Start the addon in Home Assistant
+2. Send training data to `/train` endpoint
 3. Use trained model for predictions via `/predict` endpoint
 
 ## Example Usage
 
 ### Training
 ```bash
-curl -X POST "http://localhost:14760/train" \
+curl -X POST "http://localhost:8000/train" \
   -H "Content-Type: application/json" \
   -d '{
     "model_name": "temperature_predictor",
@@ -80,7 +80,7 @@ curl -X POST "http://localhost:14760/train" \
 
 ### Prediction
 ```bash
-curl -X POST "http://localhost:14760/predict" \
+curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
   -d '{
     "model_name": "temperature_predictor",
@@ -94,4 +94,3 @@ curl -X POST "http://localhost:14760/predict" \
 - FastAPI
 - pandas
 - LightGBM
-

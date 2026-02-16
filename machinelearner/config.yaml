@@ -1,0 +1,14 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Machine Learner
+version: 0.0.1
+slug: machine-learner
+description: Home Assistant addon for training and predicting with LightGBM models
+arch:
+  - aarch64
+  - amd64
+
+stage: stable
+url: https://github.com/b3nn0/hassio-addon-machinelearner
+init: false
+ports:
+  14760/tcp: 14760
