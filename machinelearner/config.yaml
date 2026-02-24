@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Machine Learner
-version: 0.0.1
+version: 0.0.2
 slug: machine-learner
 description: Home Assistant addon for training and predicting with LightGBM models
 arch:
