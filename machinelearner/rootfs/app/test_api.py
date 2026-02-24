@@ -42,6 +42,22 @@ def test_api():
     except Exception as e:
         print(f"Error during training: {e}")
     
+    # Test is_trained endpoint - should return True for the trained model
+    try:
+        response = requests.get(f"{base_url}/is_trained?model_name=test_model")
+        print(f"Is trained response: {response.status_code}")
+        print(f"Is trained result: {response.json()}")
+    except Exception as e:
+        print(f"Error during is_trained check: {e}")
+    
+    # Test is_trained endpoint - should return False for a non-existent model
+    try:
+        response = requests.get(f"{base_url}/is_trained?model_name=non_existent_model")
+        print(f"Is trained (non-existent) response: {response.status_code}")
+        print(f"Is trained (non-existent) result: {response.json()}")
+    except Exception as e:
+        print(f"Error during is_trained check (non-existent): {e}")
+    
     # For prediction, we need to use just the feature columns (excluding target)
     # Create a new dataframe with only the features to predict on
     prediction_df = df[['feature1', 'feature2']]  # Only features, no target

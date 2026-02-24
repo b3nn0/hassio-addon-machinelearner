@@ -34,6 +34,10 @@ class TrainResponse(BaseModel):
 class PredictResponse(BaseModel):
     predictions: list
 
+class IsTrainedResponse(BaseModel):
+    model_name: str
+    is_trained: bool
+
 @app.post("/train", response_model=TrainResponse)
 async def train_model(request: TrainRequest):
     """Train a LightGBM model with the provided data"""
@@ -131,6 +135,15 @@ async def predict(request: PredictRequest):
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "models_count": len(models)}
+
+@app.get("/is_trained", response_model=IsTrainedResponse)
+async def is_trained(model_name: str):
+    """Check if a model with the specified name is trained"""
+    is_trained = model_name in models
+    return IsTrainedResponse(
+        model_name=model_name,
+        is_trained=is_trained
+    )
 
 if __name__ == "__main__":
     import uvicorn
