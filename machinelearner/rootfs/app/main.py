@@ -51,17 +51,16 @@ async def train_model(request: TrainRequest):
         if request.target_column not in df.columns:
             raise HTTPException(status_code=400, detail=f"Target column '{request.target_column}' not found in DataFrame")
         
+        # Sort by column name
+        df = df.reindex(sorted(df.columns), axis=1)
+        
         # Separate features and target
-        X = df.drop(columns=[request.target_column])
+        x = df.drop(columns=[request.target_column])
         y = df[request.target_column]
         
-        # Convert categorical columns to numeric if needed
-        for column in X.columns:
-            if X[column].dtype == 'object':
-                X[column] = pd.Categorical(X[column]).codes
-        
+       
         # Create LightGBM dataset
-        train_data = lgb.Dataset(X, label=y)
+        train_data = lgb.Dataset(x, label=y)
         
         # Define parameters for LightGBM
         params = {
@@ -102,6 +101,8 @@ async def predict(request: PredictRequest):
         
         # Parse the CSV string into a pandas DataFrame
         df = pd.read_csv(StringIO(request.dataframe))
+
+        df = df.reindex(sorted(df.columns), axis=1)
         
         # Get the trained model
         model = models[request.model_name]
